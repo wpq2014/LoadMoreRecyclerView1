@@ -13,7 +13,7 @@ public class GridSpaceItemDecoration extends RecyclerView.ItemDecoration {
     private boolean includeEdge;
 
     /**
-     * @param myRecyclerView {@link LoadMoreRecyclerView}
+     * @param mRecyclerView {@link LoadMoreRecyclerView}
      * @param space 分割线宽度
      * @param includeEdge 屏幕所有两边是否需要画分割线
      */
