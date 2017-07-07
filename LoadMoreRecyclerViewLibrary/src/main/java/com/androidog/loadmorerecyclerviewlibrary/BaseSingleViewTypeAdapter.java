@@ -1,7 +1,6 @@
 package com.androidog.loadmorerecyclerviewlibrary;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +28,7 @@ public abstract class BaseSingleViewTypeAdapter<T> extends RecyclerView.Adapter<
         }
         View convertView = LayoutInflater.from(parent.getContext()).inflate(getLayoutId(), parent, false);
         RecyclerViewHolder holder = new RecyclerViewHolder(convertView);
-        init(holder);
+        onCreate(holder);
         setListeners(holder);
         return holder;
     }
@@ -84,7 +83,7 @@ public abstract class BaseSingleViewTypeAdapter<T> extends RecyclerView.Adapter<
      * @param viewHolder The ViewHolder which should be updated to represent the contents of the
      *               item at the given position in the data set.
      */
-    protected abstract void init(RecyclerViewHolder viewHolder);
+    protected abstract void onCreate(RecyclerViewHolder viewHolder);
 
     /**
      * 设置事件监听和数据

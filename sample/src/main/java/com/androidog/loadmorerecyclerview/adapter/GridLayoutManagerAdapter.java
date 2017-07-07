@@ -23,7 +23,7 @@ public class GridLayoutManagerAdapter extends BaseSingleViewTypeAdapter<GanHuo.R
     }
 
     @Override
-    protected void init(RecyclerViewHolder viewHolder) {
+    protected void onCreate(RecyclerViewHolder viewHolder) {
         SimpleDraweeView imageView = viewHolder.getView(R.id.imageView);
         ViewGroup.LayoutParams lp = imageView.getLayoutParams();
         lp.height = ScreenUtils.getScreenWidth(imageView.getContext()) / 2;

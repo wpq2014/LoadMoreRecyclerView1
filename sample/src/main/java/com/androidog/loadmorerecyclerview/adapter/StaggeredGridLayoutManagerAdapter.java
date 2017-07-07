@@ -25,7 +25,7 @@ public class StaggeredGridLayoutManagerAdapter extends BaseSingleViewTypeAdapter
     }
 
     @Override
-    protected void init(RecyclerViewHolder viewHolder) {
+    protected void onCreate(RecyclerViewHolder viewHolder) {
 
     }
 

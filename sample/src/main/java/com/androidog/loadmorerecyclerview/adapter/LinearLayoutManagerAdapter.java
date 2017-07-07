@@ -22,7 +22,7 @@ public class LinearLayoutManagerAdapter extends BaseSingleViewTypeAdapter<GanHuo
     }
 
     @Override
-    protected void init(RecyclerViewHolder viewHolder) {
+    protected void onCreate(RecyclerViewHolder viewHolder) {
 
     }
 
