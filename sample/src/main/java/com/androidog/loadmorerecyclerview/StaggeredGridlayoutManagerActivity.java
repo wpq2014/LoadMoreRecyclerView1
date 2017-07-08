@@ -15,13 +15,12 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.androidog.loadmorerecyclerview.adapter.StaggeredGridLayoutManagerAdapter;
+import com.androidog.loadmorerecyclerview.api.Api;
 import com.androidog.loadmorerecyclerview.api.ApiHelper;
-import com.androidog.loadmorerecyclerview.api.RetrofitService;
 import com.androidog.loadmorerecyclerview.bean.Girl;
-import com.androidog.loadmorerecyclerviewlibrary.BaseSingleViewTypeAdapter;
-import com.androidog.loadmorerecyclerviewlibrary.LoadMoreRecyclerView;
 import com.androidog.loadmorerecyclerview.service.GirlService;
 import com.androidog.loadmorerecyclerview.widget.HeaderAndFooterView;
+import com.androidog.loadmorerecyclerviewlibrary.BaseSingleViewTypeAdapter;
 import com.androidog.loadmorerecyclerviewlibrary.LoadMoreRecyclerView;
 
 import org.greenrobot.eventbus.EventBus;
@@ -37,10 +36,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
-import okhttp3.OkHttpClient;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 /**
  * @author wpq
@@ -130,15 +125,8 @@ public class StaggeredGridlayoutManagerActivity extends AppCompatActivity {
 
     /** 一大波美女即将登场 */
     private void showTime() {
-        // 使用豆瓣美女api 接口：http://www.dbmeinv.com/dbgroup/show.htm?cid=4&pager_offset=1
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://www.dbmeinv.com/dbgroup/")
-                .client(new OkHttpClient())
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .build();
-        RetrofitService service = retrofit.create(RetrofitService.class);
-        service.getGirls("4", page)
+        Api.createDoubanService()
+                .getGirls("4", page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new DisposableObserver<String>() {
@@ -163,24 +151,6 @@ public class StaggeredGridlayoutManagerActivity extends AppCompatActivity {
                     }
                 });
 
-//        Call<String> call = service.getGirls("4", page);
-//        call.enqueue(new Callback<String>() {
-//            @Override
-//            public void onResponse(Call<String> call, Response<String> response) {
-//                Log.e(TAG, response.code() + ", " + response.isSuccessful() + ", " + response.message());
-//                if (response.isSuccessful()) {
-////                    Log.e(TAG, response.body() + "");
-//                    List<Girl> girls = ApiHelper.parseGirls(response.body());
-//                    GirlService.startService(StaggeredGridlayoutManagerActivity.this, girls);
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<String> call, Throwable t) {
-//                Log.e(TAG, t.getMessage());
-//                mRecyclerView.loadMoreError();
-//            }
-//        });
     }
 
     @Override

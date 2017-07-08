@@ -47,6 +47,8 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     compile 'com.squareup.retrofit2:converter-scalars:2.1.0'
     compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    // https://github.com/square/okhttp
+    compile 'com.squareup.okhttp3:logging-interceptor:3.8.0'
     // https://github.com/liaohuqiu/android-Ultra-Pull-To-Refresh
     compile 'in.srain.cube:ultra-ptr:1.0.11'
     // https://github.com/jhy/jsoup

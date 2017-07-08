@@ -15,11 +15,10 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.androidog.loadmorerecyclerview.adapter.LinearLayoutManagerAdapter;
-import com.androidog.loadmorerecyclerview.api.RetrofitService;
+import com.androidog.loadmorerecyclerview.api.Api;
 import com.androidog.loadmorerecyclerview.bean.GanHuo;
-import com.androidog.loadmorerecyclerviewlibrary.BaseSingleViewTypeAdapter;
-import com.androidog.loadmorerecyclerviewlibrary.LoadMoreRecyclerView;
 import com.androidog.loadmorerecyclerview.widget.HeaderAndFooterView;
+import com.androidog.loadmorerecyclerviewlibrary.BaseSingleViewTypeAdapter;
 import com.androidog.loadmorerecyclerviewlibrary.LoadMoreRecyclerView;
 
 import java.util.ArrayList;
@@ -31,10 +30,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
-import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * @author wpq
@@ -55,6 +51,8 @@ public class LinearLayoutManagerActivity extends AppCompatActivity {
     private List<GanHuo.Result> mList = new ArrayList<>();
 
     private int page = 50; // 当前用的接口最多512条数据
+
+    Retrofit retrofit;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -119,15 +117,8 @@ public class LinearLayoutManagerActivity extends AppCompatActivity {
      * @param isRefresh 刷新 or 加载更多
      */
     private void showTime(final boolean isRefresh) {
-        // 使用gank.io api 福利接口：http://gank.io/api/data/福利/{每页条数}/页数
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://gank.io/")
-                .client(new OkHttpClient())
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .build();
-        RetrofitService service = retrofit.create(RetrofitService.class);
-        service.getGanHuo("福利", PAGE_COUNT, page)
+        Api.createGankService()
+                .getGanHuo("福利", PAGE_COUNT, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new DisposableObserver<GanHuo>() {
@@ -168,42 +159,6 @@ public class LinearLayoutManagerActivity extends AppCompatActivity {
                     }
                 });
 
-//        Call<GanHuo> call = service.getGanHuo("福利", PAGE_COUNT, page);
-//        call.enqueue(new Callback<GanHuo>() {
-//            @Override
-//            public void onResponse(Call<GanHuo> call, Response<GanHuo> response) {
-//                Log.e(TAG, response.code() + ", " + response.isSuccessful() + ", " + response.message());
-//                if (response.isSuccessful()) {
-//                    Log.e(TAG, response.body() + "");
-//                    GanHuo ganhuo = response.body();
-//
-//                    if (isRefresh) {
-//                        mSwipeRefreshLayout.setRefreshing(false);
-//                        mRecyclerView.scrollToPosition(0);
-//                        mList.clear();
-//                        mAdapter.notifyDataSetChanged();
-//                    }
-//                    mList.addAll(ganhuo.getResults());
-////                    mAdapter.notifyDataSetChanged();
-//                    mAdapter.notifyItemInserted(mRecyclerView.getHeadersCount() + mList.size());
-////                    mAdapter.notifyItemRangeInserted(mRecyclerView.getHeadersCount() + mList.size(), ganhuo.getResults().size());
-//                    if (mList.size() < PAGE_COUNT) {
-//                        mRecyclerView.noNeedToLoadMore();
-//                    } else if (ganhuo.getResults().size() < PAGE_COUNT) {
-//                        mRecyclerView.noMore();
-//                    } else {
-//                        mRecyclerView.loadMoreComplete();
-//                        page++;
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<GanHuo> call, Throwable t) {
-//                Log.e(TAG, t.getMessage());
-//                mRecyclerView.loadMoreError();
-//            }
-//        });
     }
 
     @Override
