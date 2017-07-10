@@ -122,7 +122,7 @@ public class GridLayoutManagerActivity extends AppCompatActivity {
      * @param isRefresh 刷新 or 加载更多
      */
     private void showTime(final boolean isRefresh) {
-        Api.createGankService()
+        Api.getInstance().getGankService()
                 .getGanHuo("福利", PAGE_COUNT, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

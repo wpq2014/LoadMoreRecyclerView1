@@ -5,13 +5,30 @@ import com.androidog.loadmorerecyclerview.api.service.GankService;
 
 public class Api {
 
-    private Api() { throw new AssertionError("cannot be instantiated");}
+    private GankService mGankService;
+    private DoubanService mDoubanService;
 
-    public static GankService createGankService() {
-        return RetrofitManager.getInstance().getGankRetrofit().create(GankService.class);
+    private Api() {}
+
+    public static Api getInstance() {
+        return SingletonHolder.INSTANCE;
     }
 
-    public static DoubanService createDoubanService() {
-        return RetrofitManager.getInstance().getDoubanRetrofit().create(DoubanService.class);
+    private static class SingletonHolder {
+        private static final Api INSTANCE = new Api();
+    }
+
+    public GankService getGankService() {
+        if (mGankService == null) {
+            mGankService = RetrofitManager.getInstance().getGankRetrofit().create(GankService.class);
+        }
+        return mGankService;
+    }
+
+    public DoubanService getDoubanService() {
+        if (mDoubanService == null) {
+            mDoubanService = RetrofitManager.getInstance().getDoubanRetrofit().create(DoubanService.class);
+        }
+        return mDoubanService;
     }
 }

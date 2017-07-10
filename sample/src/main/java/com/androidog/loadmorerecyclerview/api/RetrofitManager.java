@@ -29,11 +29,11 @@ public class RetrofitManager {
     private RetrofitManager() {}
 
     static RetrofitManager getInstance() {
-        return SingletonHolder.instance;
+        return SingletonHolder.INSTANCE;
     }
 
     private static class SingletonHolder {
-        private static final RetrofitManager instance = new RetrofitManager();
+        private static final RetrofitManager INSTANCE = new RetrofitManager();
     }
 
     Retrofit getGankRetrofit() {

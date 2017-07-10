@@ -125,7 +125,7 @@ public class StaggeredGridlayoutManagerActivity extends AppCompatActivity {
 
     /** 一大波美女即将登场 */
     private void showTime() {
-        Api.createDoubanService()
+        Api.getInstance().getDoubanService()
                 .getGirls("4", page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
