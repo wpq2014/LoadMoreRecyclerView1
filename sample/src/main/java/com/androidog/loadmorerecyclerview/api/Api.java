@@ -18,6 +18,10 @@ public class Api {
         private static final Api INSTANCE = new Api();
     }
 
+//    public <T> T getService(Class<T> classType) {
+//        return RetrofitManager.getInstance().getGankRetrofit().create(classType);
+//    }
+
     public GankService getGankService() {
         if (mGankService == null) {
             mGankService = RetrofitManager.getInstance().getGankRetrofit().create(GankService.class);
