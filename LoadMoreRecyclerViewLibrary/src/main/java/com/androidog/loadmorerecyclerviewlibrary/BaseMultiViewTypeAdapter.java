@@ -2,7 +2,6 @@ package com.androidog.loadmorerecyclerviewlibrary;
 
 import android.support.annotation.LayoutRes;
 import android.support.v7.widget.RecyclerView;
-import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +24,7 @@ public abstract class BaseMultiViewTypeAdapter<T> extends RecyclerView.Adapter<R
 
     @Override
     public RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (mMultiViewTypeHelper == null) {
+        if (mMultiViewTypeHelper == null || 0 == mMultiViewTypeHelper.getLayoutId(viewType)) {
             throw new IllegalArgumentException("onCreateMultiViewType must not be null!");
         }
         View convertView = LayoutInflater.from(parent.getContext()).inflate(mMultiViewTypeHelper.getLayoutId(viewType), parent, false);

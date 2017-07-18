@@ -1,16 +1,14 @@
 package com.androidog.loadmorerecyclerview;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
 import com.androidog.loadmorerecyclerview.adapter.MultiTypeAdapter1;
 import com.androidog.loadmorerecyclerview.bean.MultiTypeBean;
-import com.androidog.loadmorerecyclerviewlibrary.LoadMoreRecyclerView;
-import com.androidog.loadmorerecyclerviewlibrary.LoadMoreRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,12 +21,12 @@ import butterknife.ButterKnife;
  * @author wpq
  * @version 1.0
  */
-public class MultiViewTypeActivity1 extends AppCompatActivity {
+public class MultiViewTypeWithSwipeRefreshLayoutActivity extends AppCompatActivity {
 
     public static final int PAGE_COUNT = 15;
 
     @BindView(R.id.recyclerView)
-    LoadMoreRecyclerView mRecyclerView;
+    RecyclerView mRecyclerView;
     @BindView(R.id.swipeRefreshLayout)
     SwipeRefreshLayout mSwipeRefreshLayout;
 
@@ -42,7 +40,7 @@ public class MultiViewTypeActivity1 extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_multi_view_type1);
+        setContentView(R.layout.activity_multi_view_type_with_swipe_refresh_layout);
         ButterKnife.bind(this);
 
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -60,12 +58,7 @@ public class MultiViewTypeActivity1 extends AppCompatActivity {
         mRecyclerView.setAdapter(mAdapter);
 
         mSwipeRefreshLayout.setRefreshing(true);
-        mSwipeRefreshLayout.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                loadMoreData();
-            }
-        }, 80);
+        loadMoreData();
     }
 
     /**
@@ -77,16 +70,16 @@ public class MultiViewTypeActivity1 extends AppCompatActivity {
             return;
         }
 
-        mList.add(1, new MultiTypeBean(MultiTypeBean.TYPE_DATE, "2017年" + (++index) + "月"));
-        for (int i = 0; i < PAGE_COUNT - 1; i++) {
-            int type = MultiTypeBean.TYPE_LEFT + new Random().nextInt(2);
-            String content = type == MultiTypeBean.TYPE_LEFT ? "我是左边" : "我是右边";
-            mList.add(2, new MultiTypeBean(type, content));
-        }
-
-        new Handler().postDelayed(new Runnable() {
+        mRecyclerView.postDelayed(new Runnable() {
             @Override
             public void run() {
+                mList.add(1, new MultiTypeBean(MultiTypeBean.TYPE_DATE, "2017年" + (++index) + "月"));
+                for (int i = 0; i < PAGE_COUNT - 1; i++) {
+                    int type = MultiTypeBean.TYPE_LEFT + new Random().nextInt(2);
+                    String content = type == MultiTypeBean.TYPE_LEFT ? "我是左边" : "我是右边";
+                    mList.add(2, new MultiTypeBean(type, content));
+                }
+
                 mAdapter.notifyDataSetChanged();
                 if (mList.size() >= PAGE_COUNT + 1) {
                     mLinearLayoutManager.scrollToPositionWithOffset(PAGE_COUNT, 0);

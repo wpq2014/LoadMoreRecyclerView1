@@ -169,7 +169,7 @@ public class StaggeredGridlayoutManagerActivity extends AppCompatActivity {
                 showTime();
                 break;
             case R.id.action_one_page: // 只有一页
-                page = 2655;
+                page = 2654;
                 isRefresh = true;
                 mSwipeRefreshLayout.setRefreshing(true);
                 showTime();

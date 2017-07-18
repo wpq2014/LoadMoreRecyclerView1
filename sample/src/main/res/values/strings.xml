@@ -5,8 +5,10 @@
     <string name="LinearLayoutManager">LinearLayoutManager</string>
     <string name="GridLayoutManager">GridLayoutManager</string>
     <string name="StaggeredGridLayoutManager">StaggeredGridLayoutManager</string>
-    <string name="MultiViewType1">MultiViewType1</string>
-    <string name="MultiViewType2">MultiViewType2</string>
+    <string name="MultiViewTypeWithLoadMore">MultiViewType + LoadMore</string>
+    <string name="MultiViewTypeWithSwipeRefreshLayout">MultiViewType + SwipeRefreshLayout</string>
+    <string name="MultiViewTypeWithUltraPullToRefresh">MultiViewType + UltraPullToRefresh</string>
+    <string name="MultiViewTypeWithLoadMoreOnTop">MultiViewType + LoadMoreOnTop</string>
 
     <!-- menu action -->
     <string name="action_settings">设置</string>
@@ -19,8 +21,10 @@
         <item>LinearLayoutManager</item>
         <item>GridLayoutManager</item>
         <item>StaggeredGridLayoutManager</item>
-        <item>MultiViewType1</item>
-        <item>MultiViewType2</item>
+        <item>MultiViewType + LoadMore</item>
+        <item>MultiViewType + SwipeRefreshLayout</item>
+        <item>MultiViewType + UltraPullToRefresh</item>
+        <item>MultiViewType + LoadMoreOnTop</item>
     </string-array>
 
     <!-- header and footer -->

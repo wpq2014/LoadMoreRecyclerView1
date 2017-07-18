@@ -11,7 +11,6 @@ import android.support.v7.widget.RecyclerView;
 import com.androidog.loadmorerecyclerview.adapter.MainAdapter;
 import com.androidog.loadmorerecyclerviewlibrary.BaseSingleViewTypeAdapter;
 import com.androidog.loadmorerecyclerviewlibrary.LoadMoreRecyclerView;
-import com.androidog.loadmorerecyclerviewlibrary.LoadMoreRecyclerView;
 
 import java.util.Arrays;
 
@@ -28,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     String[] mArray;
 
     private Class<?>[] mClasses = {HeaderAndFooterActivity.class, LinearLayoutManagerActivity.class, GridLayoutManagerActivity.class,
-            StaggeredGridlayoutManagerActivity.class, MultiViewTypeActivity1.class, MultiViewTypeActivity2.class};
+            StaggeredGridlayoutManagerActivity.class, MultiViewTypeWithLoadMoreActivity.class, MultiViewTypeWithSwipeRefreshLayoutActivity.class, MultiViewTypeWithUltraPullToRefreshActivity.class, MultiViewTypeWithLoadMoreOnTopActivity.class};
 
     private MainAdapter mAdapter;
 

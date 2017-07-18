@@ -23,8 +23,10 @@
         <activity android:name=".LinearLayoutManagerActivity" android:label="@string/LinearLayoutManager"/>
         <activity android:name=".GridLayoutManagerActivity" android:label="@string/GridLayoutManager"/>
         <activity android:name=".StaggeredGridlayoutManagerActivity" android:label="@string/StaggeredGridLayoutManager"/>
-        <activity android:name=".MultiViewTypeActivity1" android:label="@string/MultiViewType1"/>
-        <activity android:name=".MultiViewTypeActivity2" android:label="@string/MultiViewType2"/>
+        <activity android:name=".MultiViewTypeWithLoadMoreActivity" android:label="@string/MultiViewTypeWithLoadMore"/>
+        <activity android:name=".MultiViewTypeWithSwipeRefreshLayoutActivity" android:label="@string/MultiViewTypeWithSwipeRefreshLayout"/>
+        <activity android:name=".MultiViewTypeWithUltraPullToRefreshActivity" android:label="@string/MultiViewTypeWithUltraPullToRefresh"/>
+        <activity android:name=".MultiViewTypeWithLoadMoreOnTopActivity" android:label="@string/MultiViewTypeWithLoadMoreOnTop"/>
 
         <service android:name=".service.GirlService"/>
     </application>

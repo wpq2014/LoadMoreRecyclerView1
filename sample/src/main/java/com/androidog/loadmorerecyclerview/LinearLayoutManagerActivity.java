@@ -175,7 +175,7 @@ public class LinearLayoutManagerActivity extends AppCompatActivity {
                 showTime(true);
                 break;
             case R.id.action_not_enough_one_page: // 不足一页
-                page = 52;
+                page = 53;
                 showTime(true);
                 break;
         }

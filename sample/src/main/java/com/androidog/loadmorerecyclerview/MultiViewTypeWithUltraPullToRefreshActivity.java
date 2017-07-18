@@ -1,15 +1,14 @@
 package com.androidog.loadmorerecyclerview;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.androidog.loadmorerecyclerview.adapter.MultiTypeAdapter;
 import com.androidog.loadmorerecyclerview.bean.MultiTypeBean;
-import com.androidog.loadmorerecyclerviewlibrary.LoadMoreRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,14 +25,14 @@ import in.srain.cube.views.ptr.PtrHandler;
  * @author wpq
  * @version 1.0
  */
-public class MultiViewTypeActivity2 extends AppCompatActivity {
+public class MultiViewTypeWithUltraPullToRefreshActivity extends AppCompatActivity {
 
     public static final int PAGE_COUNT = 15;
 
     @BindView(R.id.ptrFrameLayout)
     PtrClassicFrameLayout mPtrFrameLayout;
     @BindView(R.id.recyclerView)
-    LoadMoreRecyclerView mRecyclerView;
+    RecyclerView mRecyclerView;
 
     private LinearLayoutManager mLinearLayoutManager;
 
@@ -45,7 +44,7 @@ public class MultiViewTypeActivity2 extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_multi_view_type2);
+        setContentView(R.layout.activity_multi_view_type_with_ultra_pull_to_refresh);
         ButterKnife.bind(this);
 
         mPtrFrameLayout.setPtrHandler(new PtrHandler() {
@@ -80,16 +79,16 @@ public class MultiViewTypeActivity2 extends AppCompatActivity {
             return;
         }
 
-        mList.add(0, new MultiTypeBean(MultiTypeBean.TYPE_DATE, "2017年" + (++index) +"月"));
-        for (int i = 0; i < PAGE_COUNT - 1; i++) {
-            int type = MultiTypeBean.TYPE_LEFT + new Random().nextInt(2);
-            String content = type == MultiTypeBean.TYPE_LEFT ? "我是左边" : "我是右边";
-            mList.add(1, new MultiTypeBean(type, content));
-        }
-
-        new Handler().postDelayed(new Runnable() {
+        mRecyclerView.postDelayed(new Runnable() {
             @Override
             public void run() {
+                mList.add(0, new MultiTypeBean(MultiTypeBean.TYPE_DATE, "2017年" + (++index) +"月"));
+                for (int i = 0; i < PAGE_COUNT - 1; i++) {
+                    int type = MultiTypeBean.TYPE_LEFT + new Random().nextInt(2);
+                    String content = type == MultiTypeBean.TYPE_LEFT ? "我是左边" : "我是右边";
+                    mList.add(1, new MultiTypeBean(type, content));
+                }
+
 //                mAdapter.notifyItemInserted(0);
                 mAdapter.notifyDataSetChanged();
                 if (mList.size() >= PAGE_COUNT) {
@@ -97,12 +96,13 @@ public class MultiViewTypeActivity2 extends AppCompatActivity {
                 }
             }
         }, 1000);
+
         mPtrFrameLayout.postDelayed(new Runnable() {
             @Override
             public void run() {
                 mPtrFrameLayout.refreshComplete();
             }
-        }, 1300);
+        }, 1200);
     }
 
 }
