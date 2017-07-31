@@ -180,7 +180,7 @@ public class GridLayoutManagerActivity extends AppCompatActivity {
                 showTime(true);
                 break;
             case R.id.action_not_enough_one_page: // 不足一页
-                page = 75;
+                page = 76;
                 showTime(true);
                 break;
         }
