@@ -149,7 +149,7 @@ public class LinearLayoutManagerActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.e(TAG, "onError");
+                        Log.e(TAG, e.toString());
                         mRecyclerView.loadMoreError();
                     }
 
