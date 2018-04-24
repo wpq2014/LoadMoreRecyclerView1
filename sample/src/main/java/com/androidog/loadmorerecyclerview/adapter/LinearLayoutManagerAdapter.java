@@ -1,16 +1,17 @@
 package com.androidog.loadmorerecyclerview.adapter;
 
+import android.support.annotation.NonNull;
 import android.widget.TextView;
 
 import com.androidog.loadmorerecyclerview.R;
 import com.androidog.loadmorerecyclerview.bean.GanHuo;
-import com.androidog.loadmorerecyclerviewlibrary.BaseSingleViewTypeAdapter;
-import com.androidog.loadmorerecyclerviewlibrary.RecyclerViewHolder;
+import com.androidog.loadmorerecyclerviewlibrary.BaseAdapter;
+import com.androidog.loadmorerecyclerviewlibrary.BaseViewHolder;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.List;
 
-public class LinearLayoutManagerAdapter extends BaseSingleViewTypeAdapter<GanHuo.Result> {
+public class LinearLayoutManagerAdapter extends BaseAdapter<GanHuo.Result> {
 
     public LinearLayoutManagerAdapter(List<GanHuo.Result> list) {
         super(list);
@@ -22,12 +23,12 @@ public class LinearLayoutManagerAdapter extends BaseSingleViewTypeAdapter<GanHuo
     }
 
     @Override
-    protected void onCreate(RecyclerViewHolder viewHolder) {
+    protected void onCreate(@NonNull BaseViewHolder viewHolder) {
 
     }
 
     @Override
-    protected void onBind(RecyclerViewHolder viewHolder, int position, GanHuo.Result itemData) {
+    protected void onBind(@NonNull final BaseViewHolder viewHolder, final int position, @NonNull GanHuo.Result itemData) {
         SimpleDraweeView imageView = viewHolder.getView(R.id.imageView);
         imageView.setImageURI(itemData.getUrl());
 

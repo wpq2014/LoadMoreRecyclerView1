@@ -8,7 +8,7 @@ import android.widget.Toast;
 import com.androidog.loadmorerecyclerview.R;
 import com.androidog.loadmorerecyclerview.bean.MultiTypeBean;
 import com.androidog.loadmorerecyclerviewlibrary.BaseMultiViewTypeAdapter;
-import com.androidog.loadmorerecyclerviewlibrary.RecyclerViewHolder;
+import com.androidog.loadmorerecyclerviewlibrary.BaseViewHolder;
 
 import java.util.List;
 
@@ -46,7 +46,7 @@ public class MultiTypeAdapter extends BaseMultiViewTypeAdapter<MultiTypeBean> {
     }
 
     @Override
-    protected void onBind(final RecyclerViewHolder viewHolder, final int position, final MultiTypeBean itemData) {
+    protected void onBind(final BaseViewHolder viewHolder, final int position, final MultiTypeBean itemData) {
         switch (viewHolder.getItemViewType()) {
             case MultiTypeBean.TYPE_DATE: {
                 TextView tvDate = viewHolder.getView(R.id.tv_date);

@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,7 +17,8 @@ import com.androidog.loadmorerecyclerview.adapter.LinearLayoutManagerAdapter;
 import com.androidog.loadmorerecyclerview.api.Api;
 import com.androidog.loadmorerecyclerview.bean.GanHuo;
 import com.androidog.loadmorerecyclerview.widget.HeaderAndFooterView;
-import com.androidog.loadmorerecyclerviewlibrary.BaseSingleViewTypeAdapter;
+import com.androidog.loadmorerecyclerviewlibrary.BaseAdapter;
+import com.androidog.loadmorerecyclerviewlibrary.BaseViewHolder;
 import com.androidog.loadmorerecyclerviewlibrary.LoadMoreRecyclerView;
 
 import java.util.ArrayList;
@@ -86,24 +86,16 @@ public class LinearLayoutManagerActivity extends AppCompatActivity {
         mRecyclerView.addHeaderView(header1);
 
         mAdapter = new LinearLayoutManagerAdapter(mList);
-        mAdapter.setOnItemClickListener(new BaseSingleViewTypeAdapter.OnItemClickListener() {
+        mAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener<GanHuo.Result>() {
             @Override
-            public void onItemClick(RecyclerView.ViewHolder viewHolder) {
-                int position = viewHolder.getAdapterPosition();
-                try {
-                    GanHuo.Result result = mList.get(position - mRecyclerView.getHeadersCount());
-                    Toast.makeText(LinearLayoutManagerActivity.this, "单击第 " + position + " 项：" + result.getDesc(), Toast.LENGTH_SHORT).show();
-                } catch (Exception e) {}
+            public void onItemClick(@android.support.annotation.NonNull BaseViewHolder viewHolder, int position, @android.support.annotation.NonNull GanHuo.Result result) {
+                Toast.makeText(LinearLayoutManagerActivity.this, "单击第 " + position + " 项：", Toast.LENGTH_SHORT).show();
             }
         });
-        mAdapter.setOnItemLongClickListener(new BaseSingleViewTypeAdapter.OnItemLongClickListener() {
+        mAdapter.setOnItemLongClickListener(new BaseAdapter.OnItemLongClickListener<GanHuo.Result>() {
             @Override
-            public boolean onItemLongClick(RecyclerView.ViewHolder viewHolder) {
-                int position = viewHolder.getAdapterPosition();
-                try {
-                    GanHuo.Result result = mList.get(position - mRecyclerView.getHeadersCount());
-                    Toast.makeText(LinearLayoutManagerActivity.this, "长按第 " + position + " 项：" + result.getDesc(), Toast.LENGTH_SHORT).show();
-                } catch (Exception e) {}
+            public boolean onItemLongClick(@android.support.annotation.NonNull BaseViewHolder viewHolder, int position, @android.support.annotation.NonNull GanHuo.Result result) {
+                Toast.makeText(LinearLayoutManagerActivity.this, "长按第 " + position + " 项：" + result.getDesc(), Toast.LENGTH_SHORT).show();
                 return true;
             }
         });

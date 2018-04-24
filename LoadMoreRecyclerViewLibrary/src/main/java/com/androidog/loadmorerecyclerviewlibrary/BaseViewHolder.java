@@ -8,11 +8,11 @@ import android.view.View;
  * @author wpq
  * @version 1.0
  */
-public class RecyclerViewHolder extends RecyclerView.ViewHolder{
+public class BaseViewHolder extends RecyclerView.ViewHolder{
 
     private SparseArrayCompat<View> mViews;
 
-    public RecyclerViewHolder(View itemView) {
+    public BaseViewHolder(View itemView) {
         super(itemView);
         mViews = new SparseArrayCompat<>();
     }

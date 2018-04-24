@@ -1,14 +1,15 @@
 package com.androidog.loadmorerecyclerview.adapter;
 
+import android.support.annotation.NonNull;
 import android.widget.TextView;
 
 import com.androidog.loadmorerecyclerview.R;
-import com.androidog.loadmorerecyclerviewlibrary.BaseSingleViewTypeAdapter;
-import com.androidog.loadmorerecyclerviewlibrary.RecyclerViewHolder;
+import com.androidog.loadmorerecyclerviewlibrary.BaseAdapter;
+import com.androidog.loadmorerecyclerviewlibrary.BaseViewHolder;
 
 import java.util.List;
 
-public class MainAdapter extends BaseSingleViewTypeAdapter<String> {
+public class MainAdapter extends BaseAdapter<String> {
 
         public MainAdapter(List<String> list) {
             super(list);
@@ -20,12 +21,12 @@ public class MainAdapter extends BaseSingleViewTypeAdapter<String> {
         }
 
         @Override
-        protected void onCreate(RecyclerViewHolder viewHolder) {
+        protected void onCreate(@NonNull BaseViewHolder viewHolder) {
 
         }
 
         @Override
-        protected void onBind(RecyclerViewHolder viewHolder, int position, String itemData) {
+        protected void onBind(@NonNull BaseViewHolder viewHolder, int position, @NonNull String itemData) {
             TextView tvItem = viewHolder.getView(R.id.tv_item);
             tvItem.setText(itemData);
         }

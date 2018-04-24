@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -20,7 +19,8 @@ import com.androidog.loadmorerecyclerview.api.ApiHelper;
 import com.androidog.loadmorerecyclerview.bean.Girl;
 import com.androidog.loadmorerecyclerview.service.GirlService;
 import com.androidog.loadmorerecyclerview.widget.HeaderAndFooterView;
-import com.androidog.loadmorerecyclerviewlibrary.BaseSingleViewTypeAdapter;
+import com.androidog.loadmorerecyclerviewlibrary.BaseAdapter;
+import com.androidog.loadmorerecyclerviewlibrary.BaseViewHolder;
 import com.androidog.loadmorerecyclerviewlibrary.LoadMoreRecyclerView;
 
 import org.greenrobot.eventbus.EventBus;
@@ -96,24 +96,16 @@ public class StaggeredGridlayoutManagerActivity extends AppCompatActivity {
         });
 
         mAdapter = new StaggeredGridLayoutManagerAdapter(mList);
-        mAdapter.setOnItemClickListener(new BaseSingleViewTypeAdapter.OnItemClickListener() {
+        mAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener<Girl>() {
             @Override
-            public void onItemClick(RecyclerView.ViewHolder viewHolder) {
-                int position = viewHolder.getAdapterPosition();
-                try {
-                    Girl girl = mList.get(position - mRecyclerView.getHeadersCount());
-                    Toast.makeText(StaggeredGridlayoutManagerActivity.this, "单击第 " + position + " 项：" + girl.getTitle(), Toast.LENGTH_SHORT).show();
-                } catch (Exception e) {}
+            public void onItemClick(@android.support.annotation.NonNull BaseViewHolder viewHolder, int position, @android.support.annotation.NonNull Girl girl) {
+                Toast.makeText(StaggeredGridlayoutManagerActivity.this, "单击第 " + position + " 项：" + girl.getTitle(), Toast.LENGTH_SHORT).show();
             }
         });
-        mAdapter.setOnItemLongClickListener(new BaseSingleViewTypeAdapter.OnItemLongClickListener() {
+        mAdapter.setOnItemLongClickListener(new BaseAdapter.OnItemLongClickListener<Girl>() {
             @Override
-            public boolean onItemLongClick(RecyclerView.ViewHolder viewHolder) {
-                int position = viewHolder.getAdapterPosition();
-                try {
-                    Girl girl = mList.get(position - mRecyclerView.getHeadersCount());
-                    Toast.makeText(StaggeredGridlayoutManagerActivity.this, "长按第 " + position + " 项：" + girl.getTitle(), Toast.LENGTH_SHORT).show();
-                } catch (Exception e) {}
+            public boolean onItemLongClick(@android.support.annotation.NonNull BaseViewHolder viewHolder, int position, @android.support.annotation.NonNull Girl girl) {
+                Toast.makeText(StaggeredGridlayoutManagerActivity.this, "长按第 " + position + " 项：" + girl.getTitle(), Toast.LENGTH_SHORT).show();
                 return true;
             }
         });

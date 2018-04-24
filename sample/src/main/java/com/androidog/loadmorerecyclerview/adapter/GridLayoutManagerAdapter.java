@@ -1,17 +1,18 @@
 package com.androidog.loadmorerecyclerview.adapter;
 
+import android.support.annotation.NonNull;
 import android.view.ViewGroup;
 
 import com.androidog.loadmorerecyclerview.R;
 import com.androidog.loadmorerecyclerview.bean.GanHuo;
 import com.androidog.loadmorerecyclerview.util.ScreenUtils;
-import com.androidog.loadmorerecyclerviewlibrary.BaseSingleViewTypeAdapter;
-import com.androidog.loadmorerecyclerviewlibrary.RecyclerViewHolder;
+import com.androidog.loadmorerecyclerviewlibrary.BaseAdapter;
+import com.androidog.loadmorerecyclerviewlibrary.BaseViewHolder;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.List;
 
-public class GridLayoutManagerAdapter extends BaseSingleViewTypeAdapter<GanHuo.Result> {
+public class GridLayoutManagerAdapter extends BaseAdapter<GanHuo.Result> {
 
     public GridLayoutManagerAdapter(List<GanHuo.Result> list) {
         super(list);
@@ -23,7 +24,7 @@ public class GridLayoutManagerAdapter extends BaseSingleViewTypeAdapter<GanHuo.R
     }
 
     @Override
-    protected void onCreate(RecyclerViewHolder viewHolder) {
+    protected void onCreate(@NonNull BaseViewHolder viewHolder) {
         SimpleDraweeView imageView = viewHolder.getView(R.id.imageView);
         ViewGroup.LayoutParams lp = imageView.getLayoutParams();
         lp.height = ScreenUtils.getScreenWidth(imageView.getContext()) / 2;
@@ -31,7 +32,7 @@ public class GridLayoutManagerAdapter extends BaseSingleViewTypeAdapter<GanHuo.R
     }
 
     @Override
-    protected void onBind(RecyclerViewHolder viewHolder, int position, GanHuo.Result itemData) {
+    protected void onBind(@NonNull BaseViewHolder viewHolder, int position, @NonNull GanHuo.Result itemData) {
         // 0, 2, 2 position是内部Adapter的位置，不会受外部header影响
 //            Log.e("GridLayoutManager", position + ", " + viewHolder.getAdapterPosition() + ", " + viewHolder.getLayoutPosition());
 //            GridLayoutManager.LayoutParams lp = (GridLayoutManager.LayoutParams) viewHolder.itemView.getLayoutParams();

@@ -12,7 +12,7 @@ import java.util.List;
  * @author wpq
  * @version 1.0
  */
-public abstract class BaseMultiViewTypeAdapter<T> extends RecyclerView.Adapter<RecyclerViewHolder>{
+public abstract class BaseMultiViewTypeAdapter<T> extends RecyclerView.Adapter<BaseViewHolder>{
 
     private List<T> mList;
     private MultiViewTypeHelper<T> mMultiViewTypeHelper;
@@ -23,16 +23,16 @@ public abstract class BaseMultiViewTypeAdapter<T> extends RecyclerView.Adapter<R
     }
 
     @Override
-    public RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (mMultiViewTypeHelper == null || 0 == mMultiViewTypeHelper.getLayoutId(viewType)) {
             throw new IllegalArgumentException("onCreateMultiViewType must not be null!");
         }
         View convertView = LayoutInflater.from(parent.getContext()).inflate(mMultiViewTypeHelper.getLayoutId(viewType), parent, false);
-        return new RecyclerViewHolder(convertView);
+        return new BaseViewHolder(convertView);
     }
 
     @Override
-    public void onBindViewHolder(RecyclerViewHolder holder, int position) {
+    public void onBindViewHolder(BaseViewHolder holder, int position) {
         onBind(holder, position, mList.get(position));
     }
 
@@ -63,7 +63,7 @@ public abstract class BaseMultiViewTypeAdapter<T> extends RecyclerView.Adapter<R
      * @param position Position of the item whose data we want within the adapter's data set.
      * @param itemData 数据源
      */
-    protected abstract void onBind(RecyclerViewHolder viewHolder, int position, T itemData);
+    protected abstract void onBind(BaseViewHolder viewHolder, int position, T itemData);
 
     /**
      * Interface for multiple view types.

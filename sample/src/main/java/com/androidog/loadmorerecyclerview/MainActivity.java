@@ -2,14 +2,15 @@ package com.androidog.loadmorerecyclerview;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 
 import com.androidog.loadmorerecyclerview.adapter.MainAdapter;
-import com.androidog.loadmorerecyclerviewlibrary.BaseSingleViewTypeAdapter;
+import com.androidog.loadmorerecyclerviewlibrary.BaseAdapter;
+import com.androidog.loadmorerecyclerviewlibrary.BaseViewHolder;
 import com.androidog.loadmorerecyclerviewlibrary.LoadMoreRecyclerView;
 
 import java.util.Arrays;
@@ -42,10 +43,9 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
         mAdapter = new MainAdapter(Arrays.asList(mArray));
-        mAdapter.setOnItemClickListener(new BaseSingleViewTypeAdapter.OnItemClickListener() {
+        mAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener<String>() {
             @Override
-            public void onItemClick(RecyclerView.ViewHolder viewHolder) {
-                int position = viewHolder.getAdapterPosition();
+            public void onItemClick(@NonNull BaseViewHolder viewHolder, int position, @NonNull String s) {
                 startActivity(new Intent(MainActivity.this, mClasses[position]));
             }
         });
