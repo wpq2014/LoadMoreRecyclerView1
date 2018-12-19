@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/list_selector"
                 android:padding="10dp">
 
     <com.facebook.drawee.view.SimpleDraweeView
-        xmlns:fresco="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/imageView"
+        android:id="@+id/drawee"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        fresco:roundAsCircle="false"
-        fresco:roundBottomLeft="true"
-        fresco:roundBottomRight="false"
-        fresco:roundTopLeft="false"
-        fresco:roundTopRight="true"
-        fresco:roundedCornerRadius="5dp"
-        />
+        app:roundAsCircle="false"
+        app:roundBottomLeft="true"
+        app:roundBottomRight="false"
+        app:roundTopLeft="false"
+        app:roundTopRight="true"
+        app:roundedCornerRadius="5dp"
+        android:transitionName="@string/shared_element_drawee"/>
 
     <TextView
         android:id="@+id/tv_who"
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="5dp"
-        android:layout_toRightOf="@+id/imageView"
+        android:layout_toRightOf="@+id/drawee"
         android:textSize="18sp"
         android:textStyle="bold"/>
 
@@ -35,7 +35,7 @@
         android:layout_below="@+id/tv_who"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="8dp"
-        android:layout_toRightOf="@+id/imageView"
+        android:layout_toRightOf="@+id/drawee"
         android:textColor="@android:color/darker_gray"
         android:textSize="14sp"/>
 

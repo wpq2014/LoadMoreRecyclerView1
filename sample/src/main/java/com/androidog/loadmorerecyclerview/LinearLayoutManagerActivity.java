@@ -1,7 +1,10 @@
 package com.androidog.loadmorerecyclerview;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.app.SharedElementCallback;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -11,6 +14,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.androidog.loadmorerecyclerview.adapter.LinearLayoutManagerAdapter;
@@ -20,6 +24,8 @@ import com.androidog.loadmorerecyclerview.widget.HeaderAndFooterView;
 import com.androidog.loadmorerecyclerviewlibrary.BaseAdapter;
 import com.androidog.loadmorerecyclerviewlibrary.BaseViewHolder;
 import com.androidog.loadmorerecyclerviewlibrary.LoadMoreRecyclerView;
+import com.facebook.drawee.drawable.ScalingUtils;
+import com.facebook.drawee.view.DraweeTransition;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,9 +62,32 @@ public class LinearLayoutManagerActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        getWindow().setSharedElementEnterTransition(DraweeTransition.createTransitionSet(ScalingUtils.ScaleType.CENTER_CROP, ScalingUtils.ScaleType.CENTER_CROP)); // 进入
+        getWindow().setSharedElementReturnTransition(DraweeTransition.createTransitionSet(ScalingUtils.ScaleType.CENTER_CROP, ScalingUtils.ScaleType.CENTER_CROP)); // 返回
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_linearlayoutmanager);
         ButterKnife.bind(this);
+
+        setExitSharedElementCallback(new SharedElementCallback() {
+            @Override
+            public void onSharedElementEnd(List<String> sharedElementNames, List<View> sharedElements, List<View> sharedElementSnapshots) {
+                super.onSharedElementEnd(sharedElementNames, sharedElements, sharedElementSnapshots);
+                for (View view : sharedElements) {
+                    view.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        final ImageView iv_shared = (ImageView) findViewById(R.id.iv_shared);
+        iv_shared.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LinearLayoutManagerActivity.this , DetailActivity.class);
+                ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                        LinearLayoutManagerActivity.this, iv_shared, getString(R.string.shared_element_pic));
+                startActivity(intent, optionsCompat.toBundle());
+            }
+        });
 
         mSwipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimary));
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -90,6 +119,10 @@ public class LinearLayoutManagerActivity extends AppCompatActivity {
             @Override
             public void onItemClick(@android.support.annotation.NonNull BaseViewHolder viewHolder, int position, @android.support.annotation.NonNull GanHuo.Result result) {
                 Toast.makeText(LinearLayoutManagerActivity.this, "单击第 " + position + " 项：", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(LinearLayoutManagerActivity.this , DetailActivity.class);
+                ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                        LinearLayoutManagerActivity.this, viewHolder.getView(R.id.drawee), getString(R.string.shared_element_drawee));
+                startActivity(intent, optionsCompat.toBundle());
             }
         });
         mAdapter.setOnItemLongClickListener(new BaseAdapter.OnItemLongClickListener<GanHuo.Result>() {
@@ -116,7 +149,7 @@ public class LinearLayoutManagerActivity extends AppCompatActivity {
                 .subscribe(new DisposableObserver<GanHuo>() {
                     @Override
                     public void onNext(@NonNull GanHuo ganHuo) {
-                        Log.e(TAG, "onNext");
+                        Log.e(TAG, "onNext" + ganHuo);
                         if (ganHuo != null) {
                             if (isRefresh) {
                                 mSwipeRefreshLayout.setRefreshing(false);

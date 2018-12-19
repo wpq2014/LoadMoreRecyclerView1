@@ -29,7 +29,7 @@ public class LinearLayoutManagerAdapter extends BaseAdapter<GanHuo.Result> {
 
     @Override
     protected void onBind(@NonNull final BaseViewHolder viewHolder, final int position, @NonNull GanHuo.Result itemData) {
-        SimpleDraweeView imageView = viewHolder.getView(R.id.imageView);
+        SimpleDraweeView imageView = viewHolder.getView(R.id.drawee);
         imageView.setImageURI(itemData.getUrl());
 
         TextView tvWho = viewHolder.getView(R.id.tv_who);

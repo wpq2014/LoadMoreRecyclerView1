@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/iv_shared"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:src="@mipmap/ic_launcher"
+        android:scaleType="fitXY"
+        android:transitionName="@string/shared_element_pic"/>
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/drawee"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        app:roundAsCircle="false"
+        app:roundBottomLeft="true"
+        app:roundBottomRight="false"
+        app:roundTopLeft="false"
+        app:roundTopRight="true"
+        app:roundedCornerRadius="5dp"
+        android:transitionName="@string/shared_element_drawee"/>
+
+</LinearLayout>

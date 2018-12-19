@@ -37,4 +37,7 @@
     <integer name="column_2">2</integer>
     <integer name="column_1">1</integer>
 
+    <string name="shared_element_pic">shared_pic</string>
+    <string name="shared_element_drawee">shared_drawee</string>
+
 </resources>
